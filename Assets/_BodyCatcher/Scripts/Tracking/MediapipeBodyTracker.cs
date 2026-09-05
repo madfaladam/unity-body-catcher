@@ -250,6 +250,14 @@ namespace BodyCatcher.Tracking
         pose.RightAnkle =
             ToUnityPosition(landmarks[(int)BodyLandmarkId.RightAnkle]);
 
+        pose.Head = pose.Nose;
+
+        pose.Body =
+            (pose.LeftShoulder +
+            pose.RightShoulder +
+            pose.LeftHip +
+            pose.RightHip) / 4f;
+            
         return pose;
     }
 

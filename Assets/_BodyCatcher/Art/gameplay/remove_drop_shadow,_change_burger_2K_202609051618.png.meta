@@ -1,0 +1,489 @@
+fileFormatVersion: 2
+guid: 1ed358829d765fc4e8dbb0a3d01664f9
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_0
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 1900
+        width: 368
+        height: 388
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e40bb6fb68e245c4987483d5dc418532
+      internalID: -1922191192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_1
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 1908
+        width: 387
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c084f7ded9182c248ae624b7d63ede7d
+      internalID: 725330956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_2
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 1899
+        width: 324
+        height: 408
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8eaa6606ed34b8f48b5b2781580ecf4d
+      internalID: -1134133525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_3
+      rect:
+        serializedVersion: 2
+        x: 1368
+        y: 1911
+        width: 400
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e89a7654dd7f76e47b2f64e1c40fcd89
+      internalID: 1246365364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_4
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 1287
+        width: 435
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0258778de7705364fb08858027350849
+      internalID: 928310359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_5
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 1337
+        width: 390
+        height: 312
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed050678caca0084b84da649f47040f8
+      internalID: 1456645018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_6
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 1266
+        width: 240
+        height: 546
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 295eeffaa35f10d439bb1d8f08656c8d
+      internalID: -107426137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_7
+      rect:
+        serializedVersion: 2
+        x: 1460
+        y: 1255
+        width: 214
+        height: 520
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 605d454decde2fd48a5956e92f45d742
+      internalID: -380492038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_8
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 730
+        width: 383
+        height: 332
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 907395fb41bd3694386707ee6e832459
+      internalID: -2012503184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_9
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 703
+        width: 419
+        height: 456
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d428335f23afd3040838a58e97e3e796
+      internalID: -1159604246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_10
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 704
+        width: 437
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ef8e65af64fde14893ad951d3f83be8
+      internalID: -991657455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_11
+      rect:
+        serializedVersion: 2
+        x: 1455
+        y: 672
+        width: 278
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a089e171ab7719f4688e4ae939d9bc97
+      internalID: 1536490069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_12
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 122
+        width: 382
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99902bffb14fa5b40a53e18d1c744e40
+      internalID: -301123601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_13
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 120
+        width: 382
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caf12f586a364c94190bbedaaf307928
+      internalID: 1473075101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: remove_drop_shadow,_change_burger_2K_202609051618_14
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 119
+        width: 388
+        height: 343
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b61230e615a7cd14b86750955ac95cd4
+      internalID: -77029012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: a74cd9d64edc47a4cbc417a88e6ce729
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      remove_drop_shadow,_change_burger_2K_202609051618_0: -1922191192
+      remove_drop_shadow,_change_burger_2K_202609051618_1: 725330956
+      remove_drop_shadow,_change_burger_2K_202609051618_10: -991657455
+      remove_drop_shadow,_change_burger_2K_202609051618_11: 1536490069
+      remove_drop_shadow,_change_burger_2K_202609051618_12: -301123601
+      remove_drop_shadow,_change_burger_2K_202609051618_13: 1473075101
+      remove_drop_shadow,_change_burger_2K_202609051618_14: -77029012
+      remove_drop_shadow,_change_burger_2K_202609051618_15: 870827096
+      remove_drop_shadow,_change_burger_2K_202609051618_2: -1134133525
+      remove_drop_shadow,_change_burger_2K_202609051618_3: 1246365364
+      remove_drop_shadow,_change_burger_2K_202609051618_4: 928310359
+      remove_drop_shadow,_change_burger_2K_202609051618_5: 1456645018
+      remove_drop_shadow,_change_burger_2K_202609051618_6: -107426137
+      remove_drop_shadow,_change_burger_2K_202609051618_7: -380492038
+      remove_drop_shadow,_change_burger_2K_202609051618_8: -2012503184
+      remove_drop_shadow,_change_burger_2K_202609051618_9: -1159604246
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

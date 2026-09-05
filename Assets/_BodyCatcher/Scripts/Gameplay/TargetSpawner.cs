@@ -4,6 +4,10 @@ namespace BodyCatcher.Gameplay
 {
     public class TargetSpawner : MonoBehaviour
     {
+        [Header("Pool")]
+        [SerializeField]
+        private TargetPool targetPool;
+
         [Header("Targets")]
         [SerializeField]
         private FallingTarget normalTargetPrefab;
@@ -32,7 +36,8 @@ namespace BodyCatcher.Gameplay
         private void Awake()
         {
             gameManager =
-                FindFirstObjectByType<BodyCatcherGameManager>();
+                FindFirstObjectByType<
+                    BodyCatcherGameManager>();
         }
 
         private void Update()
@@ -59,7 +64,13 @@ namespace BodyCatcher.Gameplay
 
         private void SpawnTarget()
         {
-            FallingTarget prefab = GetRandomTarget();
+            if (targetPool == null)
+            {
+                return;
+            }
+
+            FallingTarget prefab =
+                GetRandomTarget();
 
             if (prefab == null)
             {
@@ -71,16 +82,16 @@ namespace BodyCatcher.Gameplay
                 spawnWidth / 2f
             );
 
-            Vector3 position = new Vector3(
-                x,
-                spawnY,
-                0f
-            );
+            Vector3 position =
+                new Vector3(
+                    x,
+                    spawnY,
+                    0f
+                );
 
-            Instantiate(
+            targetPool.Get(
                 prefab,
-                position,
-                Quaternion.identity
+                position
             );
         }
 
@@ -88,17 +99,25 @@ namespace BodyCatcher.Gameplay
         {
             float random = Random.value;
 
+            // 10% Bomb
             if (random < 0.10f)
             {
                 return bombTargetPrefab;
             }
 
+            // 10% Bonus
             if (random < 0.20f)
             {
                 return bonusTargetPrefab;
             }
 
+            // 80% Normal
             return normalTargetPrefab;
+        }
+
+        public void ResetSpawner()
+        {
+            timer = 0f;
         }
     }
 }

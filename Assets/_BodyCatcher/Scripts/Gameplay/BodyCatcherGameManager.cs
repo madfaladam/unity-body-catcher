@@ -11,13 +11,15 @@ namespace BodyCatcher.Gameplay
         [SerializeField]
         private MediapipeBodyTracker bodyTracker;
 
-        [Header("Hand Catch Zones")]
         [SerializeField]
-        private Transform leftHandZone;
+        private TargetPool targetPool;
+
+        [Header("Body Catch Zones")]
+        [SerializeField]
+        private Transform headZone;
 
         [SerializeField]
-        private Transform rightHandZone;
-
+        private Transform bodyZone;
         [Header("Coordinate")]
         [SerializeField]
         private Camera mainCamera;
@@ -117,14 +119,14 @@ namespace BodyCatcher.Gameplay
                 return;
             }
 
-            UpdateHandPosition(
-                leftHandZone,
-                pose.LeftWrist
+            UpdateBodyPartPosition(
+                headZone,
+                pose.Head
             );
 
-            UpdateHandPosition(
-                rightHandZone,
-                pose.RightWrist
+            UpdateBodyPartPosition(
+                bodyZone,
+                pose.Body
             );
         }
 
@@ -140,12 +142,12 @@ namespace BodyCatcher.Gameplay
             }
         }
 
-        private void UpdateHandPosition(
-            Transform handZone,
+        private void UpdateBodyPartPosition(
+            Transform bodyPartZone,
             Vector3 normalizedPosition
         )
         {
-            if (handZone == null || mainCamera == null)
+            if (bodyPartZone == null || mainCamera == null)
             {
                 return;
             }
@@ -159,9 +161,9 @@ namespace BodyCatcher.Gameplay
             Vector3 worldPosition =
                 mainCamera.ScreenToWorldPoint(screenPosition);
 
-            worldPosition.z = handZone.position.z;
+            worldPosition.z = bodyPartZone.position.z;
 
-            handZone.position = worldPosition;
+            bodyPartZone.position = worldPosition;
         }
 
         // --------------------------------------------------
@@ -275,6 +277,11 @@ namespace BodyCatcher.Gameplay
         private void GameOver()
         {
             State = GameState.GameOver;
+
+            if (targetPool != null)
+            {
+                targetPool.ClearAll();
+            }
 
             Debug.Log(
                 $"GAME OVER! FINAL SCORE = {Score}"

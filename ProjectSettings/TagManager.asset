@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Global Resource
   - PlayerHand
+  - PlayerBody
   layers:
   - Default
   - TransparentFX

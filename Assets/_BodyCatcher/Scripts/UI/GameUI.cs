@@ -251,7 +251,7 @@ namespace BodyCatcher.UI
                 gameManager != null)
             {
                 finalScoreText.text =
-                    $"FINAL SCORE\n{gameManager.Score}";
+                    $"{gameManager.Score}";
             }
         }
 
@@ -264,7 +264,7 @@ namespace BodyCatcher.UI
             if (scoreText != null)
             {
                 scoreText.text =
-                    $"SCORE: {score}";
+                    $"{score}";
             }
         }
 
@@ -273,14 +273,14 @@ namespace BodyCatcher.UI
             if (comboText != null)
             {
                 comboText.text =
-                    $"COMBO: x{combo}";
+                    $"x{combo}";
             }
 
             if (multiplierText != null &&
                 gameManager != null)
             {
                 multiplierText.text =
-                    $"MULTIPLIER x{gameManager.ComboMultiplier}";
+                    $"x{gameManager.ComboMultiplier}";
             }
         }
 
@@ -289,7 +289,7 @@ namespace BodyCatcher.UI
             if (livesText != null)
             {
                 livesText.text =
-                    $"LIVES: {lives}";
+                    $"{lives}";
             }
         }
     }

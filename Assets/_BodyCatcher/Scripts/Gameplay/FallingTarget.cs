@@ -6,7 +6,8 @@ namespace BodyCatcher.Gameplay
     {
         [Header("Target")]
         [SerializeField]
-        private TargetType targetType = TargetType.Normal;
+        private TargetType targetType =
+            TargetType.Normal;
 
         [Header("Movement")]
         [SerializeField]
@@ -22,11 +23,38 @@ namespace BodyCatcher.Gameplay
         private bool isFinished;
 
         private BodyCatcherGameManager gameManager;
+        private TargetPool targetPool;
+
+        public FallingTarget PoolPrefab
+        {
+            get;
+            private set;
+        }
 
         private void Awake()
         {
             gameManager =
-                FindFirstObjectByType<BodyCatcherGameManager>();
+                FindFirstObjectByType<
+                    BodyCatcherGameManager>();
+        }
+
+        public void SetPool(
+            TargetPool pool,
+            FallingTarget prefab
+        )
+        {
+            targetPool = pool;
+            PoolPrefab = prefab;
+        }
+
+        public void ResetTarget()
+        {
+            isFinished = false;
+        }
+
+        private void OnEnable()
+        {
+            isFinished = false;
         }
 
         private void Update()
@@ -49,14 +77,16 @@ namespace BodyCatcher.Gameplay
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerEnter2D(
+            Collider2D other
+        )
         {
             if (isFinished)
             {
                 return;
             }
 
-            if (!other.CompareTag("PlayerHand"))
+            if (!other.CompareTag("PlayerBody"))
             {
                 return;
             }
@@ -107,7 +137,7 @@ namespace BodyCatcher.Gameplay
                     break;
             }
 
-            Destroy(gameObject);
+            ReturnToPool();
         }
 
         private void Miss()
@@ -119,19 +149,27 @@ namespace BodyCatcher.Gameplay
 
             isFinished = true;
 
-            // Bombs are not a penalty when missed.
-            if (targetType == TargetType.Bomb)
+            if (targetType != TargetType.Bomb)
             {
-                Destroy(gameObject);
-                return;
+                if (gameManager != null)
+                {
+                    gameManager.TargetMissed();
+                }
             }
 
-            if (gameManager != null)
-            {
-                gameManager.TargetMissed();
-            }
+            ReturnToPool();
+        }
 
-            Destroy(gameObject);
+        private void ReturnToPool()
+        {
+            if (targetPool != null)
+            {
+                targetPool.ReturnToPool(this);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

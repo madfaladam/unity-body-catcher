@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 2538d38a783ba4ea894c16a9df9cc57e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Volte
+  fontNames:
+  - Volte
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 43dae1102ddf74e758a23a39c25f0308, type: 3}
+  - {fileID: 12800000, guid: d01c1de02706b4eae910ec1b0973f465, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

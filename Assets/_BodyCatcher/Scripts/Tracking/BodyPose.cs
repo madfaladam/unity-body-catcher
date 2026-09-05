@@ -25,5 +25,8 @@ namespace BodyCatcher.Tracking
 
         public Vector3 LeftAnkle;
         public Vector3 RightAnkle;
+
+        public Vector3 Head;
+        public Vector3 Body;
     }
 }
