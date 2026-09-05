@@ -44,6 +44,24 @@ namespace BodyCatcher.Gameplay
 
         private bool hasNewPose;
 
+        public int ComboMultiplier
+        {
+            get
+            {
+                if (Combo >= 10)
+                {
+                    return 3;
+                }
+
+                if (Combo >= 5)
+                {
+                    return 2;
+                }
+
+                return 1;
+            }
+        }
+
         private void Awake()
         {
             if (mainCamera == null)
@@ -165,22 +183,31 @@ namespace BodyCatcher.Gameplay
             Debug.Log("BODY CATCHER STARTED");
         }
 
-        public void TargetCaught(int score)
+        public void TargetCaught(int baseScore)
         {
             if (State != GameState.Playing)
             {
                 return;
             }
 
-            Score += score;
-
             Combo++;
+
+            int multiplier = ComboMultiplier;
+
+            int finalScore =
+                baseScore * multiplier;
+
+            Score += finalScore;
 
             OnScoreChanged?.Invoke(Score);
             OnComboChanged?.Invoke(Combo);
 
             Debug.Log(
-                $"CAUGHT! Score={Score} Combo={Combo}"
+                $"CAUGHT! " +
+                $"Base={baseScore} " +
+                $"Multiplier=x{multiplier} " +
+                $"Score+={finalScore} " +
+                $"Total={Score}"
             );
         }
 
@@ -208,6 +235,43 @@ namespace BodyCatcher.Gameplay
             }
         }
 
+        public void TargetBomb()
+        {
+            if (State != GameState.Playing)
+            {
+                return;
+            }
+
+            Combo = 0;
+
+            Lives--;
+
+            OnComboChanged?.Invoke(Combo);
+            OnLivesChanged?.Invoke(Lives);
+
+            Debug.Log(
+                $"BOMB! Lives={Lives}"
+            );
+
+            if (Lives <= 0)
+            {
+                GameOver();
+            }
+        }
+        public void ResetGame()
+        {
+            State = GameState.Ready;
+
+            Score = 0;
+            Combo = 0;
+            Lives = startingLives;
+
+            OnScoreChanged?.Invoke(Score);
+            OnComboChanged?.Invoke(Combo);
+            OnLivesChanged?.Invoke(Lives);
+
+            Debug.Log("GAME RESET");
+        }
         private void GameOver()
         {
             State = GameState.GameOver;

@@ -4,9 +4,15 @@ namespace BodyCatcher.Gameplay
 {
     public class TargetSpawner : MonoBehaviour
     {
-        [Header("Target")]
+        [Header("Targets")]
         [SerializeField]
-        private FallingTarget targetPrefab;
+        private FallingTarget normalTargetPrefab;
+
+        [SerializeField]
+        private FallingTarget bonusTargetPrefab;
+
+        [SerializeField]
+        private FallingTarget bombTargetPrefab;
 
         [Header("Spawn Area")]
         [SerializeField]
@@ -53,7 +59,9 @@ namespace BodyCatcher.Gameplay
 
         private void SpawnTarget()
         {
-            if (targetPrefab == null)
+            FallingTarget prefab = GetRandomTarget();
+
+            if (prefab == null)
             {
                 return;
             }
@@ -70,10 +78,27 @@ namespace BodyCatcher.Gameplay
             );
 
             Instantiate(
-                targetPrefab,
+                prefab,
                 position,
                 Quaternion.identity
             );
+        }
+
+        private FallingTarget GetRandomTarget()
+        {
+            float random = Random.value;
+
+            if (random < 0.10f)
+            {
+                return bombTargetPrefab;
+            }
+
+            if (random < 0.20f)
+            {
+                return bonusTargetPrefab;
+            }
+
+            return normalTargetPrefab;
         }
     }
 }

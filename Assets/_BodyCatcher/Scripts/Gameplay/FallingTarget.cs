@@ -4,13 +4,20 @@ namespace BodyCatcher.Gameplay
 {
     public class FallingTarget : MonoBehaviour
     {
+        [Header("Target")]
+        [SerializeField]
+        private TargetType targetType = TargetType.Normal;
+
         [Header("Movement")]
         [SerializeField]
         private float fallSpeed = 3f;
 
         [Header("Score")]
         [SerializeField]
-        private int scoreValue = 10;
+        private int normalScore = 10;
+
+        [SerializeField]
+        private int bonusScore = 25;
 
         private bool isFinished;
 
@@ -66,9 +73,38 @@ namespace BodyCatcher.Gameplay
 
             isFinished = true;
 
-            if (gameManager != null)
+            switch (targetType)
             {
-                gameManager.TargetCaught(scoreValue);
+                case TargetType.Normal:
+
+                    if (gameManager != null)
+                    {
+                        gameManager.TargetCaught(
+                            normalScore
+                        );
+                    }
+
+                    break;
+
+                case TargetType.Bonus:
+
+                    if (gameManager != null)
+                    {
+                        gameManager.TargetCaught(
+                            bonusScore
+                        );
+                    }
+
+                    break;
+
+                case TargetType.Bomb:
+
+                    if (gameManager != null)
+                    {
+                        gameManager.TargetBomb();
+                    }
+
+                    break;
             }
 
             Destroy(gameObject);
@@ -82,6 +118,13 @@ namespace BodyCatcher.Gameplay
             }
 
             isFinished = true;
+
+            // Bombs are not a penalty when missed.
+            if (targetType == TargetType.Bomb)
+            {
+                Destroy(gameObject);
+                return;
+            }
 
             if (gameManager != null)
             {
