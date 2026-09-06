@@ -1,4 +1,5 @@
 using TMPro;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -50,6 +51,11 @@ namespace BodyCatcher.UI
 
         [SerializeField]
         private Button homeBtn;
+
+        [SerializeField]
+        private float finalScoreCountDuration = 1f;
+
+        private Tween finalScoreTween;
 
         private void Awake()
         {
@@ -154,6 +160,7 @@ namespace BodyCatcher.UI
 
         private void OnDestroy()
         {
+            finalScoreTween?.Kill();
             UnregisterButtonListeners();
         }
 
@@ -250,8 +257,34 @@ namespace BodyCatcher.UI
             if (finalScoreText != null &&
                 gameManager != null)
             {
-                finalScoreText.text =
-                    $"{gameManager.Score}";
+                finalScoreTween?.Kill();
+                finalScoreText.text = "0";
+                SetResultButtonsVisible(false);
+
+                int finalScore = gameManager.Score;
+                finalScoreTween = DOTween.To(
+                    () => 0,
+                    value => finalScoreText.text = $"{value}",
+                    finalScore,
+                    finalScoreCountDuration
+                ).OnComplete(() => SetResultButtonsVisible(true));
+            }
+            else
+            {
+                SetResultButtonsVisible(true);
+            }
+        }
+
+        private void SetResultButtonsVisible(bool visible)
+        {
+            if (restartBtn != null)
+            {
+                restartBtn.gameObject.SetActive(visible);
+            }
+
+            if (homeBtn != null)
+            {
+                homeBtn.gameObject.SetActive(visible);
             }
         }
 

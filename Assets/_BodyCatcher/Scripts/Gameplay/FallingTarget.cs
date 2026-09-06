@@ -149,7 +149,7 @@ namespace BodyCatcher.Gameplay
 
             isFinished = true;
 
-            if (targetType != TargetType.Bomb)
+            if (targetType == TargetType.Normal)
             {
                 if (gameManager != null)
                 {
