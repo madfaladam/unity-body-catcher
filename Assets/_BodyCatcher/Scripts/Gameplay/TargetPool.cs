@@ -108,7 +108,72 @@ namespace BodyCatcher.Gameplay
             return target;
         }
 
-        public FallingTarget Get(
+        public FallingTarget GetRandomTarget(
+            TargetType type,
+            Vector3 position
+        )
+        {
+            FallingTarget prefab =
+                GetRandomPrefab(type);
+
+            if (prefab == null)
+            {
+                return null;
+            }
+
+            return Get(
+                prefab,
+                position
+            );
+        }
+
+        private FallingTarget GetRandomPrefab(
+            TargetType type
+        )
+        {
+            FallingTarget[] prefabs =
+                GetPrefabs(type);
+
+            if (prefabs == null ||
+                prefabs.Length == 0)
+            {
+                Debug.LogWarning(
+                    $"TargetPool: Tidak ada prefab untuk {type}."
+                );
+
+                return null;
+            }
+
+            int index =
+                Random.Range(
+                    0,
+                    prefabs.Length
+                );
+
+            return prefabs[index];
+        }
+
+        private FallingTarget[] GetPrefabs(
+            TargetType type
+        )
+        {
+            switch (type)
+            {
+                case TargetType.Normal:
+                    return normalTargetPrefabs;
+
+                case TargetType.Bonus:
+                    return bonusTargetPrefabs;
+
+                case TargetType.Bomb:
+                    return bombTargetPrefabs;
+
+                default:
+                    return null;
+            }
+        }
+
+        private FallingTarget Get(
             FallingTarget prefab,
             Vector3 position
         )

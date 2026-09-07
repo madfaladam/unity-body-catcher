@@ -8,18 +8,6 @@ namespace BodyCatcher.Gameplay
         [SerializeField]
         private TargetPool targetPool;
 
-        [Header("Normal Prefabs")]
-        [SerializeField]
-        private FallingTarget[] normalTargetPrefabs;
-
-        [Header("Bonus Prefabs")]
-        [SerializeField]
-        private FallingTarget[] bonusTargetPrefabs;
-
-        [Header("Bomb Prefabs")]
-        [SerializeField]
-        private FallingTarget[] bombTargetPrefabs;
-
         [Header("Spawn Area")]
         [SerializeField]
         private float spawnWidth = 7f;
@@ -80,13 +68,8 @@ namespace BodyCatcher.Gameplay
                 return;
             }
 
-            FallingTarget prefab =
-                GetRandomTargetPrefab();
-
-            if (prefab == null)
-            {
-                return;
-            }
+            TargetType targetType =
+                GetRandomTargetType();
 
             float x =
                 Random.Range(
@@ -101,56 +84,30 @@ namespace BodyCatcher.Gameplay
                     0f
                 );
 
-            targetPool.Get(
-                prefab,
+            targetPool.GetRandomTarget(
+                targetType,
                 position
             );
         }
 
-        private FallingTarget GetRandomTargetPrefab()
+        private TargetType GetRandomTargetType()
         {
             float random =
                 Random.value;
-            Debug.Log($"Random value: {random}, bombChance: {bombChance}, bonusChance: {bonusChance}");
+
             if (random < bombChance)
             {
-                return GetRandomPrefab(
-                    bombTargetPrefabs
-                );
+                return TargetType.Bomb;
             }
 
             if (random <
                 bombChance +
                 bonusChance)
             {
-                return GetRandomPrefab(
-                    bonusTargetPrefabs
-                );
+                return TargetType.Bonus;
             }
 
-            return GetRandomPrefab(
-                normalTargetPrefabs
-            );
-        }
-
-        private FallingTarget GetRandomPrefab(
-            FallingTarget[] prefabs
-        )
-        {
-            Debug.Log($"Getting random prefab from array of length: {prefabs?.Length ?? 0}");
-            if (prefabs == null ||
-                prefabs.Length == 0)
-            {
-                return null;
-            }
-
-            int index =
-                Random.Range(
-                    0,
-                    prefabs.Length
-                );
-            Debug.Log($"Selected prefab index: {index}");
-            return prefabs[index];
+            return TargetType.Normal;
         }
 
         public void ResetSpawner()
