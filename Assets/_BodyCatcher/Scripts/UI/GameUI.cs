@@ -3,6 +3,8 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using BodyCatcher.Audio;
+using AudioType = BodyCatcher.Audio.AudioType;
 
 namespace BodyCatcher.UI
 {
@@ -100,7 +102,7 @@ namespace BodyCatcher.UI
 
                 return;
             }
-
+            
             UpdateScore(gameManager.Score);
             UpdateCombo(gameManager.Combo);
             UpdateLives(gameManager.Lives);
@@ -174,17 +176,21 @@ namespace BodyCatcher.UI
             {
                 return;
             }
-
+            AudioManager.Instance.PlaySFX(AudioType.ButtonClick);      
             gameManager.StartGame();
 
             ShowHUDPanel();
+            
+            AudioManager.Instance.PlayBGM(AudioType.BGM_Game);
         }
 
         private void OnRestartButtonClicked()
         {
+            AudioManager.Instance.PlaySFX(AudioType.ButtonClick);
             SceneManager.LoadScene(
                 SceneManager.GetActiveScene().buildIndex
             );
+            AudioManager.Instance.PlayBGM(AudioType.BGM_Game);
         }
 
         private void OnHomeButtonClicked()
@@ -194,7 +200,10 @@ namespace BodyCatcher.UI
                 gameManager.ResetGame();
             }
 
+            AudioManager.Instance.PlaySFX(AudioType.ButtonClick);
             ShowStartPanel();
+            
+            AudioManager.Instance.PlayBGM(AudioType.BGM_Menu);
         }
 
         // --------------------------------------------------

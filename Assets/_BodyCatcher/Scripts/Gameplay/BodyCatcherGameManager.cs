@@ -2,6 +2,9 @@ using System;
 using UnityEngine;
 using BodyCatcher.Tracking;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using BodyCatcher.Audio;
+using AudioType = BodyCatcher.Audio.AudioType;
 
 namespace BodyCatcher.Gameplay
 {
@@ -27,6 +30,13 @@ namespace BodyCatcher.Gameplay
         [Header("Game")]
         [SerializeField]
         private int startingLives = 3;
+
+        [Header("Difficulty")]
+        [SerializeField]
+        private int catchesPerSpeedIncrease = 10;
+
+        [SerializeField]
+        private float speedMultiplierPerLevel = 0.15f;
 
         // Public events for UI
         public Action<int> OnScoreChanged;
@@ -63,7 +73,26 @@ namespace BodyCatcher.Gameplay
                 return 1;
             }
         }
+        public int TotalCatches { get; private set; }
 
+        public int DifficultyLevel
+        {
+            get
+            {
+                return TotalCatches /
+                    catchesPerSpeedIncrease;
+            }
+        }
+
+        public float CurrentSpeedMultiplier
+        {
+            get
+            {
+                return 1f +
+                    DifficultyLevel *
+                    speedMultiplierPerLevel;
+            }
+        }
         private void Awake()
         {
             if (mainCamera == null)
@@ -75,9 +104,13 @@ namespace BodyCatcher.Gameplay
 
             Score = 0;
             Combo = 0;
+            TotalCatches = 0;
             Lives = startingLives;
         }
-
+        void Start()
+        {
+            AudioManager.Instance.PlayBGM(AudioType.BGM_Menu);
+        }
         private void OnEnable()
         {
             if (bodyTracker != null)
@@ -174,6 +207,7 @@ namespace BodyCatcher.Gameplay
         {
             Score = 0;
             Combo = 0;
+            TotalCatches = 0;
             Lives = startingLives;
 
             State = GameState.Playing;
@@ -187,17 +221,12 @@ namespace BodyCatcher.Gameplay
 
         public void TargetCaught(int baseScore)
         {
-            if (State != GameState.Playing)
-            {
-                return;
-            }
+            TotalCatches++;
 
             Combo++;
 
-            int multiplier = ComboMultiplier;
-
             int finalScore =
-                baseScore * multiplier;
+                baseScore * ComboMultiplier;
 
             Score += finalScore;
 
@@ -205,11 +234,9 @@ namespace BodyCatcher.Gameplay
             OnComboChanged?.Invoke(Combo);
 
             Debug.Log(
-                $"CAUGHT! " +
-                $"Base={baseScore} " +
-                $"Multiplier=x{multiplier} " +
-                $"Score+={finalScore} " +
-                $"Total={Score}"
+                $"Catch: {TotalCatches} | " +
+                $"Difficulty: {DifficultyLevel} | " +
+                $"Speed Multiplier: {CurrentSpeedMultiplier:F2}x"
             );
         }
 
@@ -266,6 +293,7 @@ namespace BodyCatcher.Gameplay
 
             Score = 0;
             Combo = 0;
+            TotalCatches = 0;
             Lives = startingLives;
 
             OnScoreChanged?.Invoke(Score);
@@ -286,6 +314,9 @@ namespace BodyCatcher.Gameplay
             Debug.Log(
                 $"GAME OVER! FINAL SCORE = {Score}"
             );
+
+            AudioManager.Instance.StopBGM();
+            AudioManager.Instance.PlaySFX(AudioType.Finish);
 
             OnGameOver?.Invoke();
         }

@@ -5,44 +5,65 @@ namespace BodyCatcher.Gameplay
 {
     public class TargetPool : MonoBehaviour
     {
-        [Header("Pool")]
+        [Header("Pool Settings")]
         [SerializeField]
-        private int initialPoolSize = 20;
+        private int initialPoolSize = 2;
 
         [SerializeField]
         private bool expandable = true;
 
-        [Header("Target Prefabs")]
+        [Header("Normal Prefabs")]
         [SerializeField]
-        private FallingTarget normalTargetPrefab;
+        private FallingTarget[] normalTargetPrefabs;
 
+        [Header("Bonus Prefabs")]
         [SerializeField]
-        private FallingTarget bonusTargetPrefab;
+        private FallingTarget[] bonusTargetPrefabs;
 
+        [Header("Bomb Prefabs")]
         [SerializeField]
-        private FallingTarget bombTargetPrefab;
+        private FallingTarget[] bombTargetPrefabs;
 
         private readonly Dictionary<
             FallingTarget,
             Queue<FallingTarget>
         > pools = new();
 
-        private readonly HashSet<FallingTarget> activeTargets = new();
+        private readonly HashSet<
+            FallingTarget
+        > activeTargets = new();
 
         private void Awake()
         {
-            CreatePool(normalTargetPrefab);
-            CreatePool(bonusTargetPrefab);
-            CreatePool(bombTargetPrefab);
+            CreatePools(normalTargetPrefabs);
+            CreatePools(bonusTargetPrefabs);
+            CreatePools(bombTargetPrefabs);
         }
 
-        private void CreatePool(FallingTarget prefab)
+        private void CreatePools(
+            FallingTarget[] prefabs
+        )
         {
-            if (prefab == null)
+            if (prefabs == null)
             {
                 return;
             }
 
+            foreach (FallingTarget prefab in prefabs)
+            {
+                if (prefab == null)
+                {
+                    continue;
+                }
+
+                CreatePool(prefab);
+            }
+        }
+
+        private void CreatePool(
+            FallingTarget prefab
+        )
+        {
             if (pools.ContainsKey(prefab))
             {
                 return;
@@ -51,9 +72,14 @@ namespace BodyCatcher.Gameplay
             Queue<FallingTarget> pool =
                 new Queue<FallingTarget>();
 
-            pools.Add(prefab, pool);
+            pools.Add(
+                prefab,
+                pool
+            );
 
-            for (int i = 0; i < initialPoolSize; i++)
+            for (int i = 0;
+                 i < initialPoolSize;
+                 i++)
             {
                 FallingTarget target =
                     CreateTarget(prefab);
@@ -67,7 +93,10 @@ namespace BodyCatcher.Gameplay
         )
         {
             FallingTarget target =
-                Instantiate(prefab, transform);
+                Instantiate(
+                    prefab,
+                    transform
+                );
 
             target.gameObject.SetActive(false);
 
@@ -93,14 +122,11 @@ namespace BodyCatcher.Gameplay
                 prefab,
                 out Queue<FallingTarget> pool))
             {
-                CreatePool(prefab);
+                Debug.LogWarning(
+                    $"TargetPool: Prefab {prefab.name} belum terdaftar."
+                );
 
-                if (!pools.TryGetValue(
-                    prefab,
-                    out pool))
-                {
-                    return null;
-                }
+                return null;
             }
 
             FallingTarget target = null;
@@ -169,7 +195,9 @@ namespace BodyCatcher.Gameplay
         public void ClearAll()
         {
             FallingTarget[] active =
-                new FallingTarget[activeTargets.Count];
+                new FallingTarget[
+                    activeTargets.Count
+                ];
 
             activeTargets.CopyTo(active);
 

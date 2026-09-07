@@ -1,4 +1,6 @@
+using BodyCatcher.Audio;
 using UnityEngine;
+using AudioType = BodyCatcher.Audio.AudioType;
 
 namespace BodyCatcher.Gameplay
 {
@@ -24,7 +26,7 @@ namespace BodyCatcher.Gameplay
 
         private BodyCatcherGameManager gameManager;
         private TargetPool targetPool;
-
+        private VFXPool vfxPool;
         public FallingTarget PoolPrefab
         {
             get;
@@ -36,6 +38,9 @@ namespace BodyCatcher.Gameplay
             gameManager =
                 FindFirstObjectByType<
                     BodyCatcherGameManager>();
+
+            vfxPool =
+                FindFirstObjectByType<VFXPool>();
         }
 
         public void SetPool(
@@ -65,9 +70,18 @@ namespace BodyCatcher.Gameplay
                 return;
             }
 
+            float speedMultiplier = 1f;
+
+            if (gameManager != null)
+            {
+                speedMultiplier =
+                    gameManager.CurrentSpeedMultiplier;
+            }
+
             transform.Translate(
                 Vector3.down *
                 fallSpeed *
+                speedMultiplier *
                 Time.deltaTime
             );
 
@@ -103,9 +117,21 @@ namespace BodyCatcher.Gameplay
 
             isFinished = true;
 
+            Vector3 catchPosition =
+                transform.position;
+
             switch (targetType)
             {
                 case TargetType.Normal:
+
+                    AudioManager.Instance?.PlaySFX(
+                        AudioType.CatchNormal
+                    );
+
+                    vfxPool?.Play(
+                        VFXType.Catch,
+                        catchPosition
+                    );
 
                     if (gameManager != null)
                     {
@@ -118,6 +144,15 @@ namespace BodyCatcher.Gameplay
 
                 case TargetType.Bonus:
 
+                    AudioManager.Instance?.PlaySFX(
+                        AudioType.CatchBonus
+                    );
+
+                    vfxPool?.Play(
+                        VFXType.Bonus,
+                        catchPosition
+                    );
+
                     if (gameManager != null)
                     {
                         gameManager.TargetCaught(
@@ -129,6 +164,15 @@ namespace BodyCatcher.Gameplay
 
                 case TargetType.Bomb:
 
+                    AudioManager.Instance?.PlaySFX(
+                        AudioType.Bomb
+                    );
+
+                    vfxPool?.Play(
+                        VFXType.Bomb,
+                        catchPosition
+                    );
+
                     if (gameManager != null)
                     {
                         gameManager.TargetBomb();
@@ -139,7 +183,6 @@ namespace BodyCatcher.Gameplay
 
             ReturnToPool();
         }
-
         private void Miss()
         {
             if (isFinished)

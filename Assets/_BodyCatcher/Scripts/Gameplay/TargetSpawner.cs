@@ -8,15 +8,17 @@ namespace BodyCatcher.Gameplay
         [SerializeField]
         private TargetPool targetPool;
 
-        [Header("Targets")]
+        [Header("Normal Prefabs")]
         [SerializeField]
-        private FallingTarget normalTargetPrefab;
+        private FallingTarget[] normalTargetPrefabs;
 
+        [Header("Bonus Prefabs")]
         [SerializeField]
-        private FallingTarget bonusTargetPrefab;
+        private FallingTarget[] bonusTargetPrefabs;
 
+        [Header("Bomb Prefabs")]
         [SerializeField]
-        private FallingTarget bombTargetPrefab;
+        private FallingTarget[] bombTargetPrefabs;
 
         [Header("Spawn Area")]
         [SerializeField]
@@ -28,6 +30,15 @@ namespace BodyCatcher.Gameplay
         [Header("Timing")]
         [SerializeField]
         private float spawnInterval = 1.5f;
+
+        [Header("Spawn Chance")]
+        [Range(0f, 1f)]
+        [SerializeField]
+        private float bombChance = 0.10f;
+
+        [Range(0f, 1f)]
+        [SerializeField]
+        private float bonusChance = 0.10f;
 
         private float timer;
 
@@ -70,17 +81,18 @@ namespace BodyCatcher.Gameplay
             }
 
             FallingTarget prefab =
-                GetRandomTarget();
+                GetRandomTargetPrefab();
 
             if (prefab == null)
             {
                 return;
             }
 
-            float x = Random.Range(
-                -spawnWidth / 2f,
-                spawnWidth / 2f
-            );
+            float x =
+                Random.Range(
+                    -spawnWidth / 2f,
+                    spawnWidth / 2f
+                );
 
             Vector3 position =
                 new Vector3(
@@ -95,24 +107,50 @@ namespace BodyCatcher.Gameplay
             );
         }
 
-        private FallingTarget GetRandomTarget()
+        private FallingTarget GetRandomTargetPrefab()
         {
-            float random = Random.value;
-
-            // 10% Bomb
-            if (random < 0.10f)
+            float random =
+                Random.value;
+            Debug.Log($"Random value: {random}, bombChance: {bombChance}, bonusChance: {bonusChance}");
+            if (random < bombChance)
             {
-                return bombTargetPrefab;
+                return GetRandomPrefab(
+                    bombTargetPrefabs
+                );
             }
 
-            // 10% Bonus
-            if (random < 0.20f)
+            if (random <
+                bombChance +
+                bonusChance)
             {
-                return bonusTargetPrefab;
+                return GetRandomPrefab(
+                    bonusTargetPrefabs
+                );
             }
 
-            // 80% Normal
-            return normalTargetPrefab;
+            return GetRandomPrefab(
+                normalTargetPrefabs
+            );
+        }
+
+        private FallingTarget GetRandomPrefab(
+            FallingTarget[] prefabs
+        )
+        {
+            Debug.Log($"Getting random prefab from array of length: {prefabs?.Length ?? 0}");
+            if (prefabs == null ||
+                prefabs.Length == 0)
+            {
+                return null;
+            }
+
+            int index =
+                Random.Range(
+                    0,
+                    prefabs.Length
+                );
+            Debug.Log($"Selected prefab index: {index}");
+            return prefabs[index];
         }
 
         public void ResetSpawner()
